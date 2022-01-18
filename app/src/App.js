@@ -6,18 +6,20 @@ import JoinSession from './pages/joinSession';
 import { Switch, Route } from 'react-router-dom';
 import './index.css';
 import NavBar from './components/navbar';
+import { useState } from 'react';
 
 
 function App() {
+    const [hideNavbar,setHideNavbar] = useState(false)
     return (
         <div className="app">
-            <NavBar />
+            {!hideNavbar && <NavBar />}
             <Switch>
                 <Route exact path="/">
-                    <CreateSession />
+                    <CreateSession setHideNavbar={setHideNavbar}/>
                 </Route>
                 <Route exact path="/n/:meetingId">
-                    <JoinSession />
+                    <JoinSession setHideNavbar={setHideNavbar}/>
                 </Route>
             </Switch>
         </div>

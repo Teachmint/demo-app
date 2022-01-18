@@ -20,13 +20,17 @@ import { generateHash } from '../../utils';
 const useStyles = makeStyles((theme) => ({
     form: {
         backgroundColor: 'white',
-        height: '593px',
-        width: '440px',
+        maxHeight:'596px',
+        maxWidth: '440px',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent:'center',
         alignItems: 'center',
-        padding: '18px'
+        padding: '18px',
+        boxShadow: '0px 0px 20px 0px rgba(26, 57, 108, 0.05)',
+        borderRadius: '10px',
+        [theme.breakpoints.down(600)]: {
+            height: '100%'
+        }
     },
     InputField: {
         width: '100%',
@@ -46,22 +50,30 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '60px'
     },
     label: {
-        marginBottom: '8px'
+        marginBottom: '8px',
+        color: '#1F3965'
     },
     startBtn: {
         backgroundColor: 'rgba(29, 161, 242, 1)',
         color: 'white',
         '&:hover': {
-            backgroundColor: 'rgba(29, 161, 242, 1)'
+            backgroundColor: 'rgba(29, 161, 242, 1)',
+            boxShadow: 'none'
         },
         '&:disabled': {
             backgroundColor: 'rgba(29, 161, 242, 1)'
         },
-        padding: '10px'
+        padding: '13px',
+        boxShadow: 'none'
     },
-    endAdornment:{
-        marginLeft:'20px'
-
+    copytxt: {
+        color: '#6B82AB',
+        fontSize: '14px'
+    },
+    btnBox: {
+        width: '100%',
+        marginTop: '30px',
+        display: 'flex'
     }
 }));
 
@@ -71,6 +83,14 @@ const CreateSessionForm = (props) => {
     const [userName, setUserName] = useState('');
     const [meetingName, setMeetingName] = useState('');
     const [link, setLink] = useState(null);
+    const [isCopied, setIsCopied] = useState(false);
+    useEffect(() => {
+        if (isCopied) {
+            setTimeout(() => {
+                setIsCopied(false);
+            }, 3000);
+        }
+    }, [isCopied]);
     useEffect(() => {
         if (meetingName === '') {
             setLink('');
@@ -82,6 +102,12 @@ const CreateSessionForm = (props) => {
     const handleStartClassClick = () => {
         if (userName !== '' && meetingName !== '') {
             handleCreateSession({ name: userName, meetingName: meetingName });
+        }
+    };
+    const handleCopyLink = () => {
+        if (meetingName !== "") {
+            window.navigator.clipboard.writeText(link);
+            setIsCopied(true);
         }
     };
     return (
@@ -135,23 +161,29 @@ const CreateSessionForm = (props) => {
                     value={link}
                     type="text"
                     size="small"
-                    style={{height:'40px',padding:0}}
+                    style={{ height: '40px', padding: 0 }}
                     endAdornment={
-                        <InputAdornment position="end" className={classes.endAdornment}>
-                            <IconButton>
-                                <FileCopy />
+                        <InputAdornment
+                            position="end"
+                            className={classes.endAdornment}
+                        >
+                            <IconButton onClick={handleCopyLink}>
+                                <FileCopy
+                                    style={isCopied ? { color: 'green' } : {}}
+                                />
                             </IconButton>
                         </InputAdornment>
                     }
                     placeholder="fill in the details to get class link"
                 />
-                <Typography variant="p">
-                    students can join the classroom using above link
+                <Typography variant="p" className={classes.copytxt}>
+                    Students can join the classroom using above link
                 </Typography>
             </Box>
 
-            <Box className={classes.InputField}>
+            <Box className={classes.btnBox}>
                 <Button
+                    fullWidth
                     variant="contained"
                     type="button"
                     onClick={handleStartClassClick}

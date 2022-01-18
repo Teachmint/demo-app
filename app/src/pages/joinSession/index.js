@@ -15,15 +15,13 @@ import { LOAD_BALANCER_URL, TYPE } from '../../config';
 import JoinSessionForm from './joinForm';
 import { joinSession } from '../../api.service';
 import { makeid } from '../../utils';
-import { toast,ToastContainer } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
         height: '100vh',
-        width:'100%',
+        width: '100%',
         backgroundColor: '#E8F1FE',
         [theme.breakpoints.down(600)]: {
             backgroundColor: 'white'
@@ -37,6 +35,7 @@ function JoinMeeting(props) {
     const [sessionUrl, setSessionUrl] = useState(null);
     const [meetingId, setMeetingId] = useState(null);
     const [isApiCallInProcess, setIsApiCallInProcess] = useState(false);
+    const {setHideNavbar} = props
 
     useEffect(() => {
         if (params.params?.meetingId) {
@@ -53,26 +52,25 @@ function JoinMeeting(props) {
             meetingId: meetingId,
             type: TYPE.NORMAL
         };
-        console.log(userJoinObj, 'userObj');
         joinSession(userJoinObj)
             .then(async (res) => {
                 const data = await res.json();
                 setIsApiCallInProcess(false);
                 if (data.success) {
                     setSessionUrl(data.data);
-                    window.open(data.data, '_self');
+                    setHideNavbar(true)
+                    // window.open(data.data, '_self');
                 }
             })
             .catch((err) => {
                 setIsApiCallInProcess(false);
-                toast.info('Something went wrong');
             });
     };
 
     return (
         <Box className={classes.formContainer}>
-            <Backdrop open={isApiCallInProcess} style={{zIndex:1}}>
-                <CircularProgress color='primary'/>
+            <Backdrop open={isApiCallInProcess} style={{ zIndex: 1 }}>
+                <CircularProgress color="primary" />
             </Backdrop>
             {sessionUrl ? (
                 <iframe
@@ -94,7 +92,6 @@ function JoinMeeting(props) {
             ) : (
                 <JoinSessionForm handleJoinSession={handleJoinSession} />
             )}
-            <ToastContainer position='top-right'/>
         </Box>
     );
 }

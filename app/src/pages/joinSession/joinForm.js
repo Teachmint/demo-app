@@ -14,11 +14,13 @@ const useStyles = makeStyles((theme) => ({
     joinForm: {
         backgroundColor: 'white',
         width: '440px',
-        height: '489px',
+        height: '470px',
         padding: '18px',
         [theme.breakpoints.down(600)]:{
             backgroundColor:'white',
-        }
+        },
+        boxShadow:'0px 0px 20px 0px rgba(26, 57, 108, 0.05)',
+        borderRadius:'10px'
     },
     joinImgBox: {
         display: 'flex',
@@ -76,7 +78,7 @@ const JoinSessionForm = (props) => {
     };
     const classes = useStyles();
     return (
-        <Grid className={classes.joinForm}>
+        <Box className={classes.joinForm}>
             <Box className={classes.joinImgBox}>
                 <img src={joinSessionImg} />
                 <Typography variant="p" className={classes.heading}>
@@ -100,8 +102,8 @@ const JoinSessionForm = (props) => {
                 />
             </Box>
             <Box className={classes.secureTxt}>
-                <Typography style={{ display: 'flex' }}>
-                    <img src={secureImg} alt="secire" />
+                <Typography style={{ display: 'flex',alignItems:'center'}}>
+                    <img src={secureImg} alt="secire" style={{marginRight:'5px'}}/>
                     Your class is secure.
                 </Typography>
             </Box>
@@ -117,7 +119,7 @@ const JoinSessionForm = (props) => {
                     Join Meeting
                 </Button>
             </Box>
-        </Grid>
+        </Box>
     );
 };
 

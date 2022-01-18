@@ -1,51 +1,71 @@
 import React, { useState } from 'react';
-import { Box } from '@material-ui/core';
+import { Backdrop, Box, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import { TYPE } from '../../config';
 import CreateSessionForm from './createSessionForm';
 import { createSession, joinSession } from '../../api.service';
 import { generateHash } from '../../utils';
+import NavBar from '../../components/navbar';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
         display: 'flex',
         justifyContent: 'center',
         // alignItems: 'center',
+        // flexDirection:'column',
         height: '100vh',
         backgroundColor: '#E8F1FE',
-        [theme.breakpoints.down('xs')]: {
-            backgroundColor: '#E8F1FE'
+        [theme.breakpoints.down(600)]: {
+            backgroundColor: 'white'
         }
     }
 }));
 
-function CreateSession() {
+function CreateSession(props) {
+    const { setHideNavbar} = props
     const classes = useStyles();
     const [sessionUrl, setSessionUrl] = useState(null);
+    const [isApiCallInProcess, setIsApiCallInProcess] = useState(false);
 
     const handleCreateSession = async (sessionFormData) => {
+        setIsApiCallInProcess(true);
         let SessionObj = {
             name: sessionFormData.name,
             meetingId: generateHash(sessionFormData.meetingName).toString()
         };
-        createSession(SessionObj).then((res) => {
-            let userJoinObj = {
-                fullName: sessionFormData.name,
-                userId: generateHash(sessionFormData.name).toString(),
-                meetingId: generateHash(sessionFormData.meetingName).toString(),
-                type: TYPE.MODERATOR
-            };
-            joinSession(userJoinObj).then(async (res) => {
-                const data = await res.json();
-                if (data.success) {
-                    window.open(data.data, '_self');
-                    // setSessionUrl(data.data)
-                }
+        createSession(SessionObj)
+            .then((res) => {
+                let userJoinObj = {
+                    fullName: sessionFormData.name,
+                    userId: generateHash(sessionFormData.name).toString(),
+                    meetingId: generateHash(
+                        sessionFormData.meetingName
+                    ).toString(),
+                    type: TYPE.MODERATOR
+                };
+                joinSession(userJoinObj)
+                    .then(async (res) => {
+                        const data = await res.json();
+                        if (data.success) {
+                            setIsApiCallInProcess(false);
+                            setHideNavbar(true)
+                            // window.open(data.data, '_self');
+                            setSessionUrl(data.data)
+                        }
+                    })
+                    .catch((err) => {
+                        setIsApiCallInProcess(false);
+                    });
+            })
+            .catch((err) => {
+                setIsApiCallInProcess(false);
             });
-        });
     };
     return (
         <Box className={classes.formContainer}>
+            <Backdrop open={isApiCallInProcess} style={{ zIndex: 1 }}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
             {sessionUrl ? (
                 <iframe
                     title="Meeting"
@@ -64,7 +84,11 @@ function CreateSession() {
                     inset="0px"
                 ></iframe>
             ) : (
-                <CreateSessionForm handleCreateSession={handleCreateSession} />
+                <>
+                    <CreateSessionForm
+                        handleCreateSession={handleCreateSession}
+                    />
+                </>
             )}
         </Box>
     );
