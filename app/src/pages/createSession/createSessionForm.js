@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
         backgroundColor: 'white',
         maxHeight:'650px',
-        maxWidth: '440px',
+        width: '440px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
