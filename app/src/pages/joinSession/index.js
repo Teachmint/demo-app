@@ -45,6 +45,7 @@ function JoinMeeting(props) {
         
     }, []);
 
+
     const handleJoinSession = (userObject) => {
         setIsApiCallInProcess(true);
 
@@ -52,8 +53,9 @@ function JoinMeeting(props) {
             fullName: userObject.name,
             userId: makeid(12),
             meetingId: meetingId,
-            type: /^stream/.test(location.pathname)?TYPE.OBSERVER:TYPE.NORMAL
+            type: /^\/stream/.test(location.pathname)?TYPE.OBSERVER:TYPE.NORMAL
         };
+        console.log(userJoinObj,'userobj')
         joinSession(userJoinObj)
             .then(async (res) => {
                 const data = await res.json();
