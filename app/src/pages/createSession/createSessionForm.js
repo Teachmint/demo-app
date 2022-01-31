@@ -20,7 +20,7 @@ import { generateHash } from '../../utils';
 const useStyles = makeStyles((theme) => ({
     form: {
         backgroundColor: 'white',
-        maxHeight:'596px',
+        maxHeight:'650px',
         maxWidth: '440px',
         display: 'flex',
         flexDirection: 'column',
@@ -83,19 +83,29 @@ const CreateSessionForm = (props) => {
     const [userName, setUserName] = useState('');
     const [meetingName, setMeetingName] = useState('');
     const [link, setLink] = useState(null);
+    const [streamLink,setstreamLink] = useState(null)
     const [isCopied, setIsCopied] = useState(false);
+    const [isSlinkCopied,setIsSlinkCopied] = useState(false)
+
     useEffect(() => {
         if (isCopied) {
             setTimeout(() => {
                 setIsCopied(false);
             }, 3000);
         }
-    }, [isCopied]);
+        if(isSlinkCopied){
+            setTimeout(() => {
+                setIsSlinkCopied(false);
+            }, 3000);
+        }
+    }, [isCopied,isSlinkCopied]);
     useEffect(() => {
         if (meetingName === '') {
             setLink('');
+            setstreamLink('')
         } else {
-            setLink(`${window.location.origin}/n/${generateHash(meetingName)}`);
+            setLink(`${window.location.origin}/n/${meetingName.replace(' ','-')}`);
+            setstreamLink(`${window.location.origin}/stream/${meetingName.replace(' ','-')}`)
         }
     }, [meetingName]);
 
@@ -110,6 +120,13 @@ const CreateSessionForm = (props) => {
             setIsCopied(true);
         }
     };
+
+    const handleCopyStreamLink = ()=>{
+        if (meetingName !== "") {
+            window.navigator.clipboard.writeText(streamLink);
+            setIsSlinkCopied(true);
+        }
+    }
     return (
         <Box className={classes.form}>
             <Box className={classes.imgBox}>
@@ -156,7 +173,7 @@ const CreateSessionForm = (props) => {
                 />
             </Box>
             <Box className={classes.InputField}>
-                <FormLabel className={classes.label}>Classroom Link</FormLabel>
+                <FormLabel className={classes.label}>Classroom Links</FormLabel>
                 <OutlinedInput
                     value={link}
                     type="text"
@@ -178,6 +195,28 @@ const CreateSessionForm = (props) => {
                 />
                 <Typography variant="p" className={classes.copytxt}>
                     Students can join the classroom using above link
+                </Typography>
+                <OutlinedInput
+                    value={streamLink}
+                    type="text"
+                    size="small"
+                    style={{ height: '40px', padding: 0,marginTop:'10px' }}
+                    endAdornment={
+                        <InputAdornment
+                            position="end"
+                            className={classes.endAdornment}
+                        >
+                            <IconButton onClick={handleCopyStreamLink}>
+                                <FileCopy
+                                    style={isSlinkCopied ? { color: 'green' } : {}}
+                                />
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    placeholder="fill in the details to get stream link"
+                />
+                <Typography variant="p" className={classes.copytxt}>
+                    use this link to join a stream
                 </Typography>
             </Box>
 

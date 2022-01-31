@@ -10,17 +10,18 @@ import {
 } from '@material-ui/core';
 import joinSessionImg from '../../assets/joinsessionImg.svg';
 import secureImg from '../../assets/secure.svg';
+import { useRouteMatch } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     joinForm: {
         backgroundColor: 'white',
         width: '440px',
-        height: '470px',
+        height: '520px',
         padding: '18px',
-        [theme.breakpoints.down(600)]:{
-            backgroundColor:'white',
+        [theme.breakpoints.down(600)]: {
+            backgroundColor: 'white',
         },
-        boxShadow:'0px 0px 20px 0px rgba(26, 57, 108, 0.05)',
-        borderRadius:'10px'
+        boxShadow: '0px 0px 20px 0px rgba(26, 57, 108, 0.05)',
+        borderRadius: '10px'
     },
     joinImgBox: {
         display: 'flex',
@@ -51,31 +52,37 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.error.contrastText,
         '&:hover': {
             backgroundColor: 'rgba(29, 161, 242, 1)',
-            boxShadow:'none'
+            boxShadow: 'none'
         },
         '&:disabled': {
             backgroundColor: 'rgba(29, 161, 242, 1)'
         },
-        boxShadow:'none',
-        padding:'12px'
+        boxShadow: 'none',
+        padding: '12px'
 
     },
-    secureTxt:{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        marginBottom:'25px'
+    secureTxt: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '25px'
+    },
+    copytxt: {
+        color: '#6B82AB',
+        fontSize: '14px'
     }
 }));
 
 const JoinSessionForm = (props) => {
-    const { handleJoinSession } = props;
+    const { handleJoinSession, isObserver } = props;
     const [name, setName] = useState('');
     const handleJoinClick = () => {
         if (name !== '') {
             handleJoinSession({ name: name });
         }
     };
+    const params = useRouteMatch();
+
     const classes = useStyles();
     return (
         <Box className={classes.joinForm}>
@@ -83,6 +90,9 @@ const JoinSessionForm = (props) => {
                 <img src={joinSessionImg} />
                 <Typography variant="p" className={classes.heading}>
                     Join meeting
+                </Typography>
+                <Typography variant='h5' style={{ marginTop: '20px' }}>
+                    {params.params.meetingId?.replace('-', ' ')}
                 </Typography>
             </Box>
             <Box className={classes.inputField}>
@@ -100,10 +110,15 @@ const JoinSessionForm = (props) => {
                     color="primary"
                     size="small"
                 />
+                {isObserver &&
+                    <Typography variant='p' className={classes.copytxt}>
+                        You are joining as an observer
+                    </Typography>
+                }
             </Box>
             <Box className={classes.secureTxt}>
-                <Typography style={{ display: 'flex',alignItems:'center'}}>
-                    <img src={secureImg} alt="secire" style={{marginRight:'5px'}}/>
+                <Typography style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={secureImg} alt="secire" style={{ marginRight: '5px' }} />
                     Your class is secure.
                 </Typography>
             </Box>

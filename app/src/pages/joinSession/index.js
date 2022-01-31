@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch,useLocation } from 'react-router-dom';
 import {
     TextField,
     Button,
@@ -32,15 +32,21 @@ const useStyles = makeStyles((theme) => ({
 function JoinMeeting(props) {
     const classes = useStyles();
     const params = useRouteMatch();
+    const location = useLocation()
     const [sessionUrl, setSessionUrl] = useState(null);
     const [meetingId, setMeetingId] = useState(null);
     const [isApiCallInProcess, setIsApiCallInProcess] = useState(false);
     const {setHideNavbar} = props
 
+    console.log(/^\/stream/.test(location.pathname),'this is location')
+
+
+
     useEffect(() => {
         if (params.params?.meetingId) {
             setMeetingId(params.params.meetingId);
         }
+        
     }, []);
 
     const handleJoinSession = (userObject) => {
@@ -50,7 +56,7 @@ function JoinMeeting(props) {
             fullName: userObject.name,
             userId: makeid(12),
             meetingId: meetingId,
-            type: TYPE.NORMAL
+            type: /^stream/.test(location.pathname)?TYPE.OBSERVER:TYPE.NORMAL
         };
         joinSession(userJoinObj)
             .then(async (res) => {
@@ -90,7 +96,7 @@ function JoinMeeting(props) {
                     inset="0px"
                 ></iframe>
             ) : (
-                <JoinSessionForm handleJoinSession={handleJoinSession} />
+                <JoinSessionForm handleJoinSession={handleJoinSession} isObserver={/^\/stream/.test(location.pathname)} />
             )}
         </Box>
     );

@@ -28,9 +28,10 @@ class IndexService {
             auth_key: process.env.AUTH_KEY,
             user_id: reqBody.userId,
             name: reqBody.fullName,
-            type: reqBody.type === 'moderator' ? 1 : 2
+            type: reqBody.type
         }
         const joinedMeetingRes = await postRestCall(`${this.apiUrl}/add/user`, tmApiRequest);
+        console.log(joinedMeetingRes,'hello')
 
         return joinedMeetingRes.obj.url;
     };
