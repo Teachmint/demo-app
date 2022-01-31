@@ -38,10 +38,6 @@ function JoinMeeting(props) {
     const [isApiCallInProcess, setIsApiCallInProcess] = useState(false);
     const {setHideNavbar} = props
 
-    console.log(/^\/stream/.test(location.pathname),'this is location')
-
-
-
     useEffect(() => {
         if (params.params?.meetingId) {
             setMeetingId(params.params.meetingId);

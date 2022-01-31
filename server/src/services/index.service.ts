@@ -31,7 +31,6 @@ class IndexService {
             type: reqBody.type
         }
         const joinedMeetingRes = await postRestCall(`${this.apiUrl}/add/user`, tmApiRequest);
-        console.log(joinedMeetingRes,'hello')
 
         return joinedMeetingRes.obj.url;
     };
