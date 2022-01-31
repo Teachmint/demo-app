@@ -47,8 +47,8 @@ function CreateSession(props) {
                         if (data.success) {
                             setIsApiCallInProcess(false);
                             setHideNavbar(true)
-                            // window.open(data.data, '_self');
-                            setSessionUrl(data.data)
+                            window.open(data.data, '_blank');
+                            // setSessionUrl(data.data)
                         }
                     })
                     .catch((err) => {
