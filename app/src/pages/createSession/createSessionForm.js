@@ -87,6 +87,7 @@ const CreateSessionForm = (props) => {
     const [isCopied, setIsCopied] = useState(false);
     const [isSlinkCopied,setIsSlinkCopied] = useState(false)
 
+
     useEffect(() => {
         if (isCopied) {
             setTimeout(() => {
@@ -128,8 +129,8 @@ const CreateSessionForm = (props) => {
         }
     }
     return (
-        <Box className={classes.form}>
-            <Box className={classes.imgBox}>
+        <Box className={classes.form} style={window.innerHeight<768?{maxHeight:'550px'}:{}}>
+            <Box className={classes.imgBox} style={window.innerHeight<768?{marginBottom:'20px'}:{}}>
                 <img
                     className={classes.computerImg}
                     src={computerImg}
@@ -139,7 +140,7 @@ const CreateSessionForm = (props) => {
                     Start your live class in just two clicks
                 </Typography>
             </Box>
-            <Box className={classes.InputField}>
+            <Box className={classes.InputField} style={window.innerHeight<768?{paddingBottom:'8px'}:{}}>
                 <FormLabel className={classes.label}>Your Name</FormLabel>
                 <TextField
                     type="text"
@@ -154,7 +155,7 @@ const CreateSessionForm = (props) => {
                     size="small"
                 />
             </Box>
-            <Box className={classes.InputField}>
+            <Box className={classes.InputField} style={window.innerHeight<768?{paddingBottom:'8px'}:{}}>
                 <FormLabel className={classes.label}>
                     Give a name to your classroom
                 </FormLabel>
@@ -172,7 +173,7 @@ const CreateSessionForm = (props) => {
                     className={classes.TextField}
                 />
             </Box>
-            <Box className={classes.InputField}>
+            <Box className={classes.InputField} style={window.innerHeight<768?{paddingBottom:'8px'}:{}}>
                 <FormLabel className={classes.label}>Classroom Links</FormLabel>
                 <OutlinedInput
                     value={link}
