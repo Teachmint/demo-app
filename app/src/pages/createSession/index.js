@@ -30,8 +30,8 @@ function CreateSession(props) {
     const handleCreateSession = async (sessionFormData) => {
         setIsApiCallInProcess(true);
         let SessionObj = {
-            name: sessionFormData.name,
-            meetingId:sessionFormData.meetingName.replace(' ','-')
+            name: sessionFormData.meetingName,
+            meetingId: sessionFormData.meetingName.replace(' ','-')
         };
         createSession(SessionObj)
             .then((res) => {
