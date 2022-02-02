@@ -31,14 +31,14 @@ function CreateSession(props) {
         setIsApiCallInProcess(true);
         let SessionObj = {
             name: sessionFormData.name,
-            meetingId:sessionFormData.meetingName.replace(' ','-')
+            meetingId:sessionFormData.meetingName.replaceAll(' ','-')
         };
         createSession(SessionObj)
             .then((res) => {
                 let userJoinObj = {
                     fullName: sessionFormData.name,
                     userId: generateHash(sessionFormData.name).toString(),
-                    meetingId: sessionFormData.meetingName.replace(' ','-'),
+                    meetingId: sessionFormData.meetingName.replaceAll(' ','-'),
                     type: TYPE.MODERATOR
                 };
                 joinSession(userJoinObj)

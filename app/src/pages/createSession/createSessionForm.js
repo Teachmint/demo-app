@@ -105,8 +105,8 @@ const CreateSessionForm = (props) => {
             setLink('');
             setstreamLink('')
         } else {
-            setLink(`${window.location.origin}/n/${meetingName.replace(' ','-')}`);
-            setstreamLink(`${window.location.origin}/stream/${meetingName.replace(' ','-')}`)
+            setLink(`${window.location.origin}/n/${meetingName.replaceAll(' ','-')}`);
+            setstreamLink(`${window.location.origin}/stream/${meetingName.replaceAll(' ','-')}`)
         }
     }, [meetingName]);
 

@@ -92,7 +92,7 @@ const JoinSessionForm = (props) => {
                     Join meeting
                 </Typography>
                 <Typography variant='h5' style={{ marginTop: '20px' }}>
-                    {params.params.meetingId?.replace('-', ' ')}
+                    {params.params.meetingId?.replaceAll('-', ' ')}
                 </Typography>
             </Box>
             <Box className={classes.inputField}>
