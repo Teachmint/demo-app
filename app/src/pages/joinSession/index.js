@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     formContainer: {
         display: 'flex',
         justifyContent: 'center',
-        height: '100vh',
         width: '100%',
         backgroundColor: '#E8F1FE',
         [theme.breakpoints.down(600)]: {
