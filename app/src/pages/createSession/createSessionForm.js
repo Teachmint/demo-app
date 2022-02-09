@@ -217,7 +217,7 @@ const CreateSessionForm = (props) => {
                     placeholder="fill in the details to get stream link"
                 />
                 <Typography variant="p" className={classes.copytxt}>
-                    use this link to join a stream
+                    Students can join one way streaming class
                 </Typography>
             </Box>
 
