@@ -6,6 +6,8 @@ import CreateSessionForm from './createSessionForm';
 import { createSession, joinSession } from '../../api.service';
 import { generateHash } from '../../utils';
 import NavBar from '../../components/navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -52,10 +54,12 @@ function CreateSession(props) {
                     })
                     .catch((err) => {
                         setIsApiCallInProcess(false);
+                        toast.error(err.message);
                     });
             })
             .catch((err) => {
                 setIsApiCallInProcess(false);
+                toast.error("Server not found");
             });
     };
     return (
@@ -63,6 +67,7 @@ function CreateSession(props) {
             <Backdrop open={isApiCallInProcess} style={{ zIndex: 1 }}>
                 <CircularProgress color="inherit" />
             </Backdrop>
+            <ToastContainer position="top-right" autoClose={4000} closeOnClick pauseOnHover/>
             {sessionUrl ? (
                 <iframe
                     title="Meeting"

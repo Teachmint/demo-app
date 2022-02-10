@@ -15,6 +15,8 @@ import { LOAD_BALANCER_URL, TYPE } from '../../config';
 import JoinSessionForm from './joinForm';
 import { joinSession } from '../../api.service';
 import { makeid } from '../../utils';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -64,9 +66,13 @@ function JoinMeeting(props) {
                     setHideNavbar(true)
                     // window.open(data.data, '_self');
                 }
+                else {
+                    toast.error(data.message);
+                }
             })
             .catch((err) => {
                 setIsApiCallInProcess(false);
+                toast.error("Server not found");
             });
     };
 
@@ -75,6 +81,7 @@ function JoinMeeting(props) {
             <Backdrop open={isApiCallInProcess} style={{ zIndex: 1 }}>
                 <CircularProgress color="primary" />
             </Backdrop>
+            <ToastContainer position="top-right" autoClose={4000} closeOnClick pauseOnHover/>
             {sessionUrl ? (
                 <iframe
                     title="Meeting"

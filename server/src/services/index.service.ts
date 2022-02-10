@@ -1,3 +1,4 @@
+import HttpException from '../exceptions/HttpException';
 import { CreateMeetingRequest, Meeting } from 'interfaces/meeting.interface';
 
 import {
@@ -31,6 +32,10 @@ class IndexService {
             type: reqBody.type
         }
         const joinedMeetingRes = await postRestCall(`${this.apiUrl}/add/user`, tmApiRequest);
+
+        if(joinedMeetingRes.status == false) {
+            throw new HttpException(500, joinedMeetingRes.msg);
+        }
 
         return joinedMeetingRes.obj.url;
     };
