@@ -16,7 +16,7 @@ This repository provides a demonstration application to use teachstack api and c
 
 - Navigate to the directory where you would like to setup the repository and clone using:
 ```http
-git clone https://github.com/kmrrhl/api-docs.git
+git clone https://github.com/Teachmint/demo-app.git
 ```
 - ### Run Server
     ```sh
