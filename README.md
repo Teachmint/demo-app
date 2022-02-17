@@ -22,7 +22,7 @@ git clone https://github.com/Teachmint/demo-app.git
     ```sh
     cd /server
     npm install --force
-    PORT=4000 TM_API_URL="https://api.teachmint.com" CLIENT_ID="`client_id`"" AUTH_KEY="`auth_key`" npm run dev
+    PORT=4000 TM_API_URL="https://api.teachmint.com" CLIENT_ID="`your_client_id`"" AUTH_KEY="`your_auth_key`" npm run dev
     ```
     (Or create a .env file in server folver with the above parameters and just enter "npm run dev")
 
@@ -31,7 +31,7 @@ git clone https://github.com/Teachmint/demo-app.git
 - ### Run App
     ```sh
     cd /app
-    npm install
+    npm install --force
     npm run start
     ```
     **(Expected result: Runs app on localhost:3000)**
