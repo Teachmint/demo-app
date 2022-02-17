@@ -3,30 +3,30 @@ import React from 'react';
 import logo from '../assets/logo.svg';
 
 const useStyles = makeStyles((theme) => ({
-    mainBox: {
-        height: '40px',
-        display: 'flex',
-        width:'100%',
-        backgroundColor:'#E8F1FE',
-        padding:'27px 30px',
-        marginTop:'10px',
-        [theme.breakpoints.down(600)]:{
-            backgroundColor:'white',
-            padding:'15px 15px'
-        }
-    }
+  mainBox: {
+    height: '40px',
+    display: 'flex',
+    width: '100%',
+    backgroundColor: '#E8F1FE',
+    padding: '27px 30px',
+    marginTop: '10px',
+    [theme.breakpoints.down(600)]: {
+      backgroundColor: 'white',
+      padding: '15px 15px',
+    },
+  },
 }));
 
 const NavBar = (props) => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <Box className={classes.mainBox}>
-            <Box>
-                <img src={logo} alt={'logo'} />
-            </Box>
-        </Box>
-    );
+  return (
+    <Box className={classes.mainBox}>
+      <Box>
+        <img src={logo} alt={'logo'} />
+      </Box>
+    </Box>
+  );
 };
 
-export default NavBar
+export default NavBar;

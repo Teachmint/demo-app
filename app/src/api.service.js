@@ -1,32 +1,25 @@
-import {BASE_URL}from './config' 
-
+import { BASE_URL } from './config';
 
 export async function joinSession(userObj) {
-    const requestJoinMeeting = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userObj)
-    };
+  const requestJoinMeeting = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userObj),
+  };
 
-    return fetch(
-        `${BASE_URL}/api/joinMeeting`,
-        requestJoinMeeting
-    )
+  return fetch(`${BASE_URL}/api/joinMeeting`, requestJoinMeeting);
 }
 
-export async function createSession(sessionObj){
-    const requestJoinMeeting = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(sessionObj)
-    };
+export async function createSession(sessionObj) {
+  const requestJoinMeeting = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(sessionObj),
+  };
 
-    return  fetch(
-        `${BASE_URL}/api/createMeeting`,
-        requestJoinMeeting
-    )
+  return fetch(`${BASE_URL}/api/createMeeting`, requestJoinMeeting);
 }
