@@ -2,7 +2,7 @@
 
 ## Integrate Live Class Infrastructure in Minutes
 
-Teachmint’s signature Educational Video As A Service product empowers live classroom learning by adding real-time audio/visual communications to your app or website, making your classroom learning into a seamless experience
+Teachmint’s signature product - TeachStack empowers live classroom learning by adding real-time audio/visual communications to your app or website, making your classroom learning into a seamless experience
 
 This repository provides a demonstration application to use teachstack api and create a basic app that connects the backend (server) and the frontend (client or app)
 
