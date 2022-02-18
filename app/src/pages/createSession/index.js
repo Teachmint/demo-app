@@ -35,27 +35,33 @@ function CreateSession(props) {
       meetingId: sessionFormData.meetingName.replaceAll(' ', '-'),
     };
     createSession(SessionObj)
-      .then((res) => {
-        const userJoinObj = {
-          fullName: sessionFormData.name,
-          userId: generateHash(sessionFormData.name).toString(),
-          meetingId: sessionFormData.meetingName.replaceAll(' ', '-'),
-          type: TYPE.MODERATOR,
-        };
-        joinSession(userJoinObj)
-          .then(async (res) => {
-            const data = await res.json();
-            if (data.success) {
+      .then(async (res) => {
+        if (res.status !== 200) {
+          setIsApiCallInProcess(false);
+          const errorMessage = await res.text();
+          toast.error(errorMessage);
+        } else {
+          const userJoinObj = {
+            fullName: sessionFormData.name,
+            userId: generateHash(sessionFormData.name).toString(),
+            meetingId: sessionFormData.meetingName.replaceAll(' ', '-'),
+            type: TYPE.MODERATOR,
+          };
+          joinSession(userJoinObj)
+            .then(async (res) => {
+              const data = await res.json();
+              if (data.success) {
+                setIsApiCallInProcess(false);
+                setHideNavbar(true);
+                window.open(data.data, '_blank');
+                // setSessionUrl(data.data)
+              }
+            })
+            .catch((err) => {
               setIsApiCallInProcess(false);
-              setHideNavbar(true);
-              window.open(data.data, '_blank');
-              // setSessionUrl(data.data)
-            }
-          })
-          .catch((err) => {
-            setIsApiCallInProcess(false);
-            toast.error(err.message);
-          });
+              toast.error(err.message);
+            });
+        }
       })
       .catch((err) => {
         setIsApiCallInProcess(false);
