@@ -1,9 +1,7 @@
-const LOAD_BALANCER_URL = 'http://localhost:4000';
+export const BASE_URL = 'http://localhost:4000';
 
-const TYPE = {
-    MODERATOR: 'moderator',
-    NORMAL: 'normal'
+export const TYPE = {
+  MODERATOR: 1,
+  NORMAL: 2,
+  OBSERVER: 3,
 };
-
-exports.TYPE = TYPE;
-exports.LOAD_BALANCER_URL = LOAD_BALANCER_URL;
