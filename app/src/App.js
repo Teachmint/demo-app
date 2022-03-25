@@ -23,6 +23,9 @@ function App() {
         <Route exact path="/stream/:meetingId">
           <JoinSession setHideNavbar={setHideNavbar} />
         </Route>
+        <Route exact path="/c/:meetingId">
+          <JoinSession setHideNavbar={setHideNavbar} />
+        </Route>
       </Switch>
     </div>
   );

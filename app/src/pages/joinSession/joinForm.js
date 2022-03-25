@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const JoinSessionForm = (props) => {
-  const { handleJoinSession, isObserver } = props;
+  const { handleJoinSession, joiningMessage } = props;
   const [name, setName] = useState('');
   const handleJoinClick = () => {
     if (name !== '') {
@@ -109,11 +109,9 @@ const JoinSessionForm = (props) => {
           color="primary"
           size="small"
         />
-        {isObserver && (
-          <Typography variant="p" className={classes.copytxt}>
-            You are joining as an observer
-          </Typography>
-        )}
+        <Typography variant="p" className={classes.copytxt}>
+          {joiningMessage}
+        </Typography>
       </Box>
       <Box className={classes.secureTxt}>
         <Typography style={{ display: 'flex', alignItems: 'center' }}>

@@ -45,6 +45,18 @@ function JoinMeeting(props) {
     }
   }, []);
 
+  let userType = 1;
+  let joiningMessage = '';
+  if (/^\/n/.test(location.pathname) == true) {
+    userType = TYPE.NORMAL;
+  } else if (/^\/stream/.test(location.pathname) == true) {
+    userType = TYPE.OBSERVER;
+    joiningMessage = 'You are joining as an observer';
+  } else {
+    userType = TYPE.COHOST;
+    joiningMessage = 'You are joining as a co-host';
+  }
+
   const handleJoinSession = (userObject) => {
     setIsApiCallInProcess(true);
 
@@ -52,7 +64,7 @@ function JoinMeeting(props) {
       fullName: userObject.name,
       userId: makeid(12),
       meetingId: meetingId,
-      type: /^\/stream/.test(location.pathname) ? TYPE.OBSERVER : TYPE.NORMAL,
+      type: userType,
     };
     console.log(userJoinObj, 'userobj');
     joinSession(userJoinObj)
@@ -104,7 +116,7 @@ function JoinMeeting(props) {
       ) : (
         <JoinSessionForm
           handleJoinSession={handleJoinSession}
-          isObserver={/^\/stream/.test(location.pathname)}
+          joiningMessage={joiningMessage}
         />
       )}
     </Box>

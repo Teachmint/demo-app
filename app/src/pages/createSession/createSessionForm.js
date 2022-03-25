@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    paddingBottom: '32px',
+    paddingBottom: '21px',
   },
   computerImg: {
     height: '109px',
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: '60px',
+    marginBottom: '40px',
   },
   label: {
     marginBottom: '8px',
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   btnBox: {
     width: '100%',
-    marginTop: '30px',
+    marginTop: '20px',
     display: 'flex',
   },
 }));
@@ -83,9 +83,11 @@ const CreateSessionForm = (props) => {
   const [userName, setUserName] = useState('');
   const [meetingName, setMeetingName] = useState('');
   const [link, setLink] = useState(null);
-  const [streamLink, setstreamLink] = useState(null);
+  const [streamLink, setStreamLink] = useState(null);
+  const [cohostLink, setCohostLink] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
   const [isSlinkCopied, setIsSlinkCopied] = useState(false);
+  const [isClinkCopied, setIsClinkCopied] = useState(false);
 
   useEffect(() => {
     if (isCopied) {
@@ -98,17 +100,26 @@ const CreateSessionForm = (props) => {
         setIsSlinkCopied(false);
       }, 3000);
     }
-  }, [isCopied, isSlinkCopied]);
+    if (isClinkCopied) {
+      setTimeout(() => {
+        setIsClinkCopied(false);
+      }, 3000);
+    }
+  }, [isCopied, isSlinkCopied, isClinkCopied]);
   useEffect(() => {
     if (meetingName === '') {
       setLink('');
-      setstreamLink('');
+      setStreamLink('');
+      setCohostLink('');
     } else {
       setLink(
         `${window.location.origin}/n/${meetingName.replaceAll(' ', '-')}`
       );
-      setstreamLink(
+      setStreamLink(
         `${window.location.origin}/stream/${meetingName.replaceAll(' ', '-')}`
+      );
+      setCohostLink(
+        `${window.location.origin}/c/${meetingName.replaceAll(' ', '-')}`
       );
     }
   }, [meetingName]);
@@ -124,11 +135,16 @@ const CreateSessionForm = (props) => {
       setIsCopied(true);
     }
   };
-
   const handleCopyStreamLink = () => {
     if (meetingName !== '') {
       window.navigator.clipboard.writeText(streamLink);
       setIsSlinkCopied(true);
+    }
+  };
+  const handleCopyCohostLink = () => {
+    if (meetingName !== '') {
+      window.navigator.clipboard.writeText(cohostLink);
+      setIsClinkCopied(true);
     }
   };
   return (
@@ -222,6 +238,23 @@ const CreateSessionForm = (props) => {
         />
         <Typography variant="p" className={classes.copytxt}>
           Students can join one way streaming class
+        </Typography>
+        <OutlinedInput
+          value={cohostLink}
+          type="text"
+          size="small"
+          style={{ height: '40px', padding: 0, marginTop: '10px' }}
+          endAdornment={
+            <InputAdornment position="end" className={classes.endAdornment}>
+              <IconButton onClick={handleCopyCohostLink}>
+                <FileCopy style={isClinkCopied ? { color: 'green' } : {}} />
+              </IconButton>
+            </InputAdornment>
+          }
+          placeholder="fill in the details to get co-host link"
+        />
+        <Typography variant="p" className={classes.copytxt}>
+          Co-hosts can join using the above link
         </Typography>
       </Box>
 
