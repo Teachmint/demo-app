@@ -13,7 +13,7 @@ export async function joinSession(userObj) {
 }
 
 export async function createSession(sessionObj) {
-  const requestJoinMeeting = {
+  const requestCreateMeeting = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,5 +21,5 @@ export async function createSession(sessionObj) {
     body: JSON.stringify(sessionObj),
   };
 
-  return fetch(`${BASE_URL}/api/createMeeting`, requestJoinMeeting);
+  return fetch(`${BASE_URL}/api/createMeeting`, requestCreateMeeting);
 }
