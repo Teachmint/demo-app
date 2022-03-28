@@ -54,7 +54,7 @@ function JoinMeeting(props) {
     joiningMessage = 'You are joining as an observer';
   } else {
     userType = TYPE.COHOST;
-    joiningMessage = 'You are joining as a co-host';
+    joiningMessage = 'You are joining as a co-teacher';
   }
 
   const handleJoinSession = (userObject) => {

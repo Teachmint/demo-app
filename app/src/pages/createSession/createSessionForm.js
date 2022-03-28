@@ -217,7 +217,7 @@ const CreateSessionForm = (props) => {
               </IconButton>
             </InputAdornment>
           }
-          placeholder="fill in the details to get class link"
+          placeholder="Fill in the details to get student link"
         />
         <Typography variant="p" className={classes.copytxt}>
           Students can join the classroom using above link
@@ -234,7 +234,7 @@ const CreateSessionForm = (props) => {
               </IconButton>
             </InputAdornment>
           }
-          placeholder="fill in the details to get stream link"
+          placeholder="Fill in the details to get stream link"
         />
         <Typography variant="p" className={classes.copytxt}>
           Students can join one way streaming class
@@ -251,10 +251,10 @@ const CreateSessionForm = (props) => {
               </IconButton>
             </InputAdornment>
           }
-          placeholder="fill in the details to get co-host link"
+          placeholder="Fill in the details to get co-teacher link"
         />
         <Typography variant="p" className={classes.copytxt}>
-          Co-hosts can join using the above link
+          Co-Teachers can join using the above link
         </Typography>
       </Box>
 
