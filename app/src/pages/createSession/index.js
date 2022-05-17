@@ -32,7 +32,7 @@ function CreateSession(props) {
     setIsApiCallInProcess(true);
     const SessionObj = {
       name: sessionFormData.meetingName,
-      meetingId: sessionFormData.meetingName.replaceAll(' ', '-'),
+      meetingId: sessionFormData.meetingName.trim().replaceAll(' ', '-'),
     };
     createSession(SessionObj)
       .then(async (res) => {
@@ -44,7 +44,7 @@ function CreateSession(props) {
           const userJoinObj = {
             fullName: sessionFormData.name,
             userId: generateHash(sessionFormData.name).toString(),
-            meetingId: sessionFormData.meetingName.replaceAll(' ', '-'),
+            meetingId: sessionFormData.meetingName.trim().replaceAll(' ', '-'),
             type: TYPE.MODERATOR,
           };
           joinSession(userJoinObj)

@@ -113,13 +113,15 @@ const CreateSessionForm = (props) => {
       setCohostLink('');
     } else {
       setLink(
-        `${window.location.origin}/n/${meetingName.replaceAll(' ', '-')}`
+        `${window.location.origin}/n/${meetingName.trim().replaceAll(' ', '-')}`
       );
       setStreamLink(
-        `${window.location.origin}/stream/${meetingName.replaceAll(' ', '-')}`
+        `${window.location.origin}/stream/${meetingName
+          .trim()
+          .replaceAll(' ', '-')}`
       );
       setCohostLink(
-        `${window.location.origin}/c/${meetingName.replaceAll(' ', '-')}`
+        `${window.location.origin}/c/${meetingName.trim().replaceAll(' ', '-')}`
       );
     }
   }, [meetingName]);
