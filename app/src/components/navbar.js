@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: '100%',
     backgroundColor: '#E8F1FE',
-    padding: '27px 30px',
+    padding: '10px 30px',
     marginTop: '10px',
     [theme.breakpoints.down(600)]: {
       backgroundColor: 'white',
