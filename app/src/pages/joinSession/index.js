@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
-import {
-  TextField,
-  Button,
-  FormLabel,
-  Typography,
-  Box,
-  Grid,
-  Backdrop,
-  CircularProgress,
-} from '@material-ui/core';
+import { Box, Backdrop, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import { LOAD_BALANCER_URL, TYPE } from '../../config';
+import { TYPE } from '../../config';
 import JoinSessionForm from './joinForm';
 import { joinSession } from '../../api.service';
 import { makeid } from '../../utils';
@@ -47,9 +38,9 @@ function JoinMeeting(props) {
 
   let userType = 1;
   let joiningMessage = '';
-  if (/^\/n/.test(location.pathname) == true) {
+  if (/^\/n/.test(location.pathname) === true) {
     userType = TYPE.NORMAL;
-  } else if (/^\/stream/.test(location.pathname) == true) {
+  } else if (/^\/stream/.test(location.pathname) === true) {
     userType = TYPE.OBSERVER;
     joiningMessage = 'You are joining as an observer';
   } else {

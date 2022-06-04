@@ -5,7 +5,6 @@ import { TYPE } from '../../config';
 import CreateSessionForm from './createSessionForm';
 import { createSession, joinSession } from '../../api.service';
 import { generateHash } from '../../utils';
-import NavBar from '../../components/navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 function CreateSession(props) {
   const { setHideNavbar } = props;
   const classes = useStyles();
-  const [sessionUrl, setSessionUrl] = useState(null);
+  const [sessionUrl] = useState(null);
   const [isApiCallInProcess, setIsApiCallInProcess] = useState(false);
 
   const handleCreateSession = async (sessionFormData) => {

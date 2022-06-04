@@ -1,21 +1,17 @@
 import {
   makeStyles,
-  Grid,
   Typography,
   FormLabel,
   TextField,
   Button,
-  TextareaAutosize,
   Box,
   InputAdornment,
-  Icon,
   IconButton,
   OutlinedInput,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import computerImg from '../../assets/computerImg.svg';
 import { FileCopy } from '@material-ui/icons';
-import { generateHash } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   form: {

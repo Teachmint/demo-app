@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   makeStyles,
-  Grid,
   FormLabel,
   TextField,
   Typography,
@@ -86,7 +85,7 @@ const JoinSessionForm = (props) => {
   return (
     <Box className={classes.joinForm}>
       <Box className={classes.joinImgBox}>
-        <img src={joinSessionImg} />
+        <img src={joinSessionImg} alt="" />
         <Typography variant="p" className={classes.heading}>
           Join meeting
         </Typography>
