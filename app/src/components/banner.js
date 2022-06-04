@@ -9,9 +9,10 @@ const banner = () => {
   const contentStyle = {
     background: '#FFF',
     color: '#354c74',
-    width: '30%',
+    width: '40%',
+    fontFamily: 'Lato',
   };
-  const arrowStyle = { color: '#FFF' }; // style for an svg element
+  const arrowStyle = { color: '#FFF' };
   return (
     <Banner
       title={
@@ -19,7 +20,7 @@ const banner = () => {
           <span
             style={{
               color: '#FFF',
-              fontWeight: 'bold',
+              fontFamily: 'Lato',
             }}
           >
             This is beta environment and we are currently testing a new feature:
@@ -31,7 +32,7 @@ const banner = () => {
                 <span
                   style={{
                     color: '#FFF',
-                    fontWeight: 'bold',
+                    fontFamily: 'Lato',
                     textDecoration: 'underline',
                   }}
                 >
