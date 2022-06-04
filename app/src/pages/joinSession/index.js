@@ -40,7 +40,7 @@ function JoinMeeting(props) {
   const { setHideNavbar } = props;
 
   useEffect(() => {
-    if (params.params?.meetingId) {
+    if (params.params && params.params.meetingId) {
       setMeetingId(params.params.meetingId);
     }
   }, []);
