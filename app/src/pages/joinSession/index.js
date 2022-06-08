@@ -38,6 +38,10 @@ function JoinMeeting(props) {
 
   let userType = 1;
   let joiningMessage = '';
+  let userId = new URLSearchParams(location.search).get('uid');
+  if (!userId) {
+    userId = makeid(12);
+  }
   if (/^\/n/.test(location.pathname) === true) {
     userType = TYPE.NORMAL;
   } else if (/^\/stream/.test(location.pathname) === true) {
@@ -53,7 +57,7 @@ function JoinMeeting(props) {
 
     const userJoinObj = {
       fullName: userObject.name,
-      userId: makeid(12),
+      userId: userId,
       meetingId: meetingId,
       type: userType,
     };
